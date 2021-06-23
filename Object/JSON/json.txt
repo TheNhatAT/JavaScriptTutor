@@ -1,0 +1,5 @@
+Note:
+    - JSON là một chuỗi string data - ko có method
+    - JSON cần {}
+    - Validate JSON
+    - Bất kỳ kiểu dữ liệu nào cũng được dùng dưới dạng JSON

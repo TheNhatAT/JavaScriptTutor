@@ -1,0 +1,5 @@
+*************Event***********
+
+* Event Object:
+    + parameters specified with the name: event, evt, e,...
+    + automatically passed to event handlers to provide extra features and information

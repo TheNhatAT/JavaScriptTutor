@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button id="bio">bio</button>
+<button id="greeting">greeting</button>
+
+<script>
+    const person = {
+        name: ['Bob', 'Smith'],
+        age: 32,
+        gender: 'male',
+        interests: ['music', 'skiing'],
+        bio: function() {
+            alert(this.name[1] + this.age);
+        },
+        greeting: function() {
+            alert('Hi! I\'m ' + this.name[0] + '.');
+        }
+    };
+
+    document.getElementById('bio').onclick = person.bio;
+    document.getElementById('greeting').onclick = person.greeting;
+
+</script>
+
+</body>
+</html>
