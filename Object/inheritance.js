@@ -21,3 +21,16 @@ function Teacher(first, last, age, gender, interests, subject) {
 
     this.subject = subject;
 }
+
+//-- inheritance prototype of Person
+// console.log(Object.getOwnPropertyNames(Teacher.prototype));
+// console.log(Object.getOwnPropertyNames(Person.prototype));
+// console.log(Object.getOwnPropertyNames(Object.prototype));
+ Teacher.prototype = Object.create(Person.prototype);
+console.log(Teacher.prototype.constructor);
+
+Object.defineProperty(Teacher.prototype, 'constructor', {
+    value: Teacher,
+    enumerable: false, // so that it does not appear in 'for in' loop
+    writable: true });
+console.log(Teacher.prototype.constructor)
