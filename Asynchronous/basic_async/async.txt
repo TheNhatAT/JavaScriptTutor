@@ -1,0 +1,14 @@
+Note:
+    - blocking: the code run and the browser be frozen
+    - there are two main types of async code style in JS:
+        + old-style callback
+        + newer promise-style
+    - promise is object representing the completion or failure of the async operation
+    - event queue: run after the main thread has finishes processing (callback queue - event loop)
+    - can't guarantee that the async function will return before the browser has processed the sync block.
+    - the functions allow code run asynchronously after certain time:
+        + setTimeout() -> MIN time to run
+        + setInterval() -> MIN time to wait
+        + requestAnimationFrame() -> new version of setInterval() for animation
+
+

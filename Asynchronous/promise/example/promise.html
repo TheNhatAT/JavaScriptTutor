@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+</head>
+<body>
+<p id="text"></p>
+
+<script>
+    <!-- one fulfilled -->
+    /**
+     let promise = fetch('coffee.jpg'); // pending
+
+     let promise2 = promise.then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+            return response.blob();
+        }
+    }); // fulfilled
+
+     let promise3 = promise2.then(myBlob => {
+        let objectURL = URL.createObjectURL(myBlob);
+        let image = document.createElement('img');
+        image.src = objectURL;
+        document.body.appendChild(image);
+    }) // process the fulfiled
+
+     let errorCase = promise3.catch(e => {
+        console.log('There has been a problem with your fetch operation: ' + e.message);
+    }); // rejected
+
+     document.getElementById('text').textContent = 'coffee';
+     */
+</script>
+
+<script>
+    <!-- Multiple fulfilled -->
+    //-- use .all static method
+    //-- a, b, c are promises object
+    // Promise.all([a, b, c]).then(values => {
+    // ...
+    // });
+    let url1 = 'coffee.jpg';
+    let url2 = 'tea.jpg';
+    let url3 = 'description.txt';
+
+    let promise1 = fetchAndDecode(url1, 'blob');
+    let promise2 = fetchAndDecode(url2, 'blob');
+    let promise3 = fetchAndDecode(url3, 'text');
+
+    function fetchAndDecode(url, type) {
+        return fetch(url).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            } else {
+                if (type === 'blob') {
+                    return response.blob();
+                } else if (type === 'text') {
+                    return response.text();
+                }
+            }
+        })
+            .catch(e => {
+                console.log(`There has been a problem with your fetch operation for resource "${url}": ` + e.message);
+            })
+            .finally(() => {
+                console.log('fetch attempt for finished.')
+            });
+
+    }
+
+    //-- then() will only run when all three promises resolve
+    Promise.all([promise1, promise2, promise3]).then(values => {
+        console.log(values);
+        // Store each value returned from the promises in separate variables; create object URLs from the blobs
+        let objectURL1 = URL.createObjectURL(values[0]);
+        console.log(objectURL1);
+
+        let objectURL2 = URL.createObjectURL(values[1]);
+        let descText = values[2];
+
+        // Display the images in <img> elements
+        let image1 = document.createElement('img');
+        let image2 = document.createElement('img');
+        image1.src = objectURL1;
+        image2.src = objectURL2;
+        document.body.appendChild(image1);
+        document.body.appendChild(image2);
+
+        // Display the text in a paragraph
+        let para = document.createElement('p');
+        para.textContent = descText;
+        document.body.appendChild(para);
+    })
+
+</script>
+</body>
+</html>

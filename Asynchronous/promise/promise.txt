@@ -1,0 +1,51 @@
+What it is?
+    -> a Promise is an object that represents an intermediate State of an operation
+    -> there is a guarantee that when the result is available, or the promise fails,
+    the code you provide will be executed in order to do something else with a successful result,
+    or to gracefully handle a failure case.
+Callback hell:
+    - example code (ordering pizza) for only use callback:
+        chooseToppings(function(toppings) {
+            placeOrder(toppings, function(order) {
+              collectOrder(order, function(pizza) {
+                eatPizza(pizza);
+              }, failureCallback);
+            }, failureCallback);
+          }, failureCallback);
+    - example code (ordering pizza) for only use promise:
+        chooseToppings()
+        .then(function(toppings) {
+          return placeOrder(toppings);
+        })
+        .then(function(order) {
+          return collectOrder(order);
+        })
+        .then(function(pizza) {
+          eatPizza(pizza);
+        })
+        .catch(failureCallback);
+        => each operation is guaranteed to wait for previous operations to complete before running
+    State of promise:
+        - pending -> khi đang xử lý (lấy dữ liệu từ DB)
+        - resolved:
+            + fulfilled -> success
+            + rejected -> error occur
+
+    Note:
+        - The way that a .then() block works is similar to when you add an event listener to an object using AddEventListener().
+        It doesn't run until an event occurs (when the promise fulfills).
+        The most notable difference is that a .then() will only run once for each time it is used,
+        whereas an event listener could be invoked multiple times.
+        - then()/catch()/finally() is the async equivalent to try/catch/finally in sync code.
+****************************
+RECAP:
+    1. When a promise is created, it is neither in a success or failure state. It is said to be pending.
+    2. When a promise returns, it is said to be resolved.
+       A successfully resolved promise is said to be fulfilled. It returns a value, which can be accessed by chaining
+       a .then() block onto the end of the promise chain. The callback function inside the .then() block will contain the promise's return value.
+       An unsuccessful resolved promise is said to be rejected. It returns a reason, an error message stating why the promise was rejected.
+       This reason can be accessed by chaining a .catch() block onto the end of the promise chain.
+
+********************************
+Promise constructor:
+    - resolve() and reject() are functions that you call to fulfil or reject

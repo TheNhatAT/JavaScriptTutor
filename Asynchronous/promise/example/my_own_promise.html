@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //-- resolve()
+    // let timeoutPromise  = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('success!');
+    //     }, 2000);
+    // })
+    //
+    // timeoutPromise.then((a) => {
+    //     alert(a);
+    // })
+    // alert('hello');
+
+    //-- reject()
+    function timeoutPromise(message, interval) {
+        return new Promise((resolve, reject) => {
+            if (message === '' || typeof message !== 'string') {
+                reject('Message is empty or not a string');
+            } else if (interval < 0 || typeof interval !== 'number') {
+                reject('Interval is negative or not a number');
+            } else {
+                setTimeout(() => {
+                    resolve(message);
+                }, interval);
+            }
+        });
+    };
+    timeoutPromise('Fucking JS!!!', 1000).then(alert).catch(e => {
+        console.log(e.message);
+    });
+</script>
+</body>
+</html>

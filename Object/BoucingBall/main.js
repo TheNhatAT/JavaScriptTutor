@@ -62,16 +62,18 @@ EvilCircle.prototype.checkBounds = function () {
 
 EvilCircle.prototype.setControls = function () {
     let _this = this;
-    window.onkeypress = function (e) {
-        if (e.key === 'a') {
-            _this.x -= _this.velX;
-        } else if (e.key === 'd') {
-            _this.x += _this.velX;
-        } else if (e.key === 'w') {
-            _this.y -= _this.velY;
-        } else if (e.key === 's') {
-            _this.y += _this.velY;
-        }
+    window.onclick = function (e) {
+        // if (e.key === 'a') {
+        //     _this.x -= _this.velX;
+        // } else if (e.key === 'd') {
+        //     _this.x += _this.velX;
+        // } else if (e.key === 'w') {
+        //     _this.y -= _this.velY;
+        // } else if (e.key === 's') {
+        //     _this.y += _this.velY;
+        // }
+        _this.x = e.clientX;
+        _this.y = e.clientY;
     }
 }
 
@@ -161,6 +163,7 @@ while (balls.length < 25) {
 
     balls.push(ball);
 }
+
 let evilCircle = new EvilCircle(100, 100, 20, 20);
 evilCircle.setControls();
 
@@ -180,7 +183,7 @@ function loop() {
         let countText = document.getElementById('count');
         countText.textContent = count.toString();
     }
-     requestAnimationFrame(loop);
+  //   requestAnimationFrame(loop);
 }
 
-loop();
+setInterval(loop, 0);
