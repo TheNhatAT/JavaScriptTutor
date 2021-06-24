@@ -1,0 +1,9 @@
+* The async keyword:
+    - make a function into async function which can return promise object
+* The await keyword:
+    - work inside async function
+    - can use await when calling any function that returns a Promise
+    -> use to pause the code until the promise fulfills
+    -> make JS runtime to pause the code on the line which it's used until the async function return its result
+
+==> Can add async in front of class/object methods make them return promises, and await promises inside them

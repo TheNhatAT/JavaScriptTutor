@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async-Await</title>
+</head>
+<body>
+<script>
+    //-- use promise
+    // fetch('coffee.jpg')
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+    //         return response.blob();
+    //     })
+    //     .then(myBlob => {
+    //         let objectURL = URL.createObjectURL(myBlob);
+    //         let image = document.createElement('img');
+    //         image.src = objectURL;
+    //         document.body.appendChild(image);
+    //     })
+    //     .catch(e => {
+    //         console.log('There has been a problem with your fetch operation: ' + e.message);
+    //     });
+
+    //-- use async vs await
+    // let fetchImage = async function() {
+    //     try {
+    //         let response = await fetch('coffee.jpg');
+    //
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+    //
+    //         let myBlob = await response.blob();
+    //
+    //         let objectURL = URL.createObjectURL(myBlob);
+    //         let image = document.createElement('img');
+    //         image.src = objectURL;
+    //         document.body.appendChild(image);
+    //     } catch (e) {
+    //         console.log(e.message);
+    //     }
+    // }
+    //
+    // fetchImage();
+
+    //-- use promise with async
+    // async function fetchImf() {
+    //         let res = await fetch('coffee.jpg'); // wait until this become fulfill
+    //         if (!res.ok) {
+    //             throw new Error(`HTTP error! status: ${res.status}`);
+    //         }
+    //         return await res.blob(); // wait until this become fulfill
+    // }
+    //
+    // fetchImf().then(blob => {
+    //     let objectURL = URL.createObjectURL(blob);
+    //     let image = document.createElement('img');
+    //     image.src = objectURL;
+    //     document.body.appendChild(image);
+    // })
+    // .catch(e => {
+    //     console.log(e.message);
+    // })
+    //
+    // alert('xxx'); // run first
+
+    //-- async with Promise.all()
+    let url1 = 'coffee.jpg';
+    let url2 = 'tea.jpg';
+    let url3 = 'description.txt';
+
+    async function fetchAndDecode(url, type) {
+        let res = await fetch(url);
+        let content;
+        if(!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        } else {
+            if (type === 'blob') {
+                content = await res.blob();
+            } else if (type === 'text') {
+                content =  await res.text();
+            }
+        }
+
+        return content;
+    }
+
+    async function displayContent() {
+        let coffee = fetchAndDecode(url1, 'blob');
+        let tea = fetchAndDecode(url2, 'blob');
+        let description = fetchAndDecode(url3, 'text');
+
+        //-- the same as Promise.all(array, values => {});
+        let values = await Promise.all([coffee, tea, description]);
+
+        let objectURL1 = URL.createObjectURL(values[0]);
+        let objectURL2 = URL.createObjectURL(values[1]);
+        let descText = values[2];
+
+        let image1 = document.createElement('img');
+        let image2 = document.createElement('img');
+        image1.src = objectURL1;
+        image2.src = objectURL2;
+        document.body.appendChild(image1);
+        document.body.appendChild(image2);
+
+        let para = document.createElement('p');
+        para.textContent = descText;
+        document.body.appendChild(para);
+    }
+
+    displayContent()
+    .catch(e => {
+        console.log(e.message);
+    })
+</script>
+</body>
+</html>
