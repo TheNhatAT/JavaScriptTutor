@@ -1,0 +1,38 @@
+6 primitives data types:
+    + undefined
+    + Boolean
+    + Number:
+        - +Infinity, -Infinity, and NaN ("Not a Number").
+        - numbers between -(2^53 − 1) and 2^53 − 1
+    + String
+        - immutable
+    + BigInt
+    + Symbol
+        - unique, immutable
+    + null
+    -> use typeof instance === 'data_types'
+Structural types:
+    + Object: use new keyword
+    + Function
+Data property:
+    + [[value]]
+    + [[Writable]]
+    + [[Enumerable]] - use in for..in loop
+    + [[Configurable]]
+    + [[Set]] and [[Get]]
+Indexed collections:
+    + Arrays:
+    + Typed Array:
+        - For raw data (represent by bit)
+        - buffer -> ArrayBuffer: an object representing a chunk of data
+        - view -> DataView: provides a getter/setter API to read and write arbitrary data to the buffer
+Keyed collections:
+    + Maps
+    + Sets
+    + WeakMaps
+    + WeakSets
+
+
+Note:
+    + Falsy value: like false in Boolean
+        - false, 0, -0, 0n, '', "", null, undefined, NaN.

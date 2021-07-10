@@ -16,5 +16,5 @@ bracket notation
 ********** prototypes ************
 Definition: Prototypes are the mechanism by which JS object INHERIT features from one another.
 
-- prototype: là 1 thuộc tính chứa 1 object cái mà định nghĩa các thành phần được ké thừa
+- prototype: là 1 thuộc tính chứa 1 object cái mà định nghĩa các thành phần được kế thừa
 - __proto__ (an object): là chuỗi prototype mà object được kế thừa

@@ -14,6 +14,10 @@ const person = {
         return 'Hi! I\'m ' + this.name[0] + '.';
     }
 };
+//
+// console.log(person.bio());
+// console.log(person.greeting());
 
-console.log(person.bio());
-console.log(person.greeting());
+person.check = true;
+person.test = true;
+console.log(person);
